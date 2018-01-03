@@ -1,0 +1,19 @@
+﻿@model IEnumerable<wb6.Models.Seen>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Html.Encode("Seen by ") @Html.Encode(Model.Count())</h2>
+
+<table class="table">
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<wb6.Models.Announcement>
+
+<div id="percentSeen">
+    <p>@Html.AttributeEncode(ViewBag.Percent)@Html.Encode("% Announcements Seen")</p>
+
+    @if (ViewBag.Percent > 60 && ViewBag.Percent < 100)
+    {
+        <div class="progress60">
+            <div class="progress-bar60" role="progressbar"
+                 style="width:@(Html.AttributeEncode(ViewBag.Percent))%;">
+            </div>
+        </div>
+    }
+    else if (ViewBag.Percent == 100)
+    {
+        <div class="progress100">
+            <div class="progress-bar" role="progressbar"
+                 style="width:@(Html.AttributeEncode(ViewBag.Percent))%;">
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="progressDefault">
+            <div class="progress-barDefault" role="progressbar"
+                 style="width:@(Html.AttributeEncode(ViewBag.Percent))%;">
+            </div>
+        </div>
+    }
+
+</div>
+
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.Encode("by ")<a href="mailto:@Html.Encode(item.User.UserName)">@Html.DisplayFor(modelItem => item.User.UserName)</a>
+            </td>
+            <td>
+                @Html.Encode("at ")@Html.DisplayFor(modelItem => item.CreatedAt)
+            </td>
+            <td>
+                @Html.ActionLink("View Announcement", "Details", new { id = item.AnnouncementID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.AnnouncementID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AnnouncementID }, new { onclick = "return confirmDelete();"})
+                
+            </td>
+        </tr>
+    }
+</table>

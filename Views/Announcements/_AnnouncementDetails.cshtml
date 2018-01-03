@@ -1,0 +1,8 @@
+﻿@model wb6.Models.AnnouncementViewModel
+
+@foreach (wb6.Models.Comment c in Model.Comments)
+{
+    <b><i><a href="mailto:@Html.Encode(c.User.UserName):">@Html.Encode(c.User.UserName)</a></i></b><br />
+            @Html.DisplayFor(modelComment => c.Content)<br />
+            @Html.DisplayFor(modelComment => c.CreatedAt)<br /><br />
+}

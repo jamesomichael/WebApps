@@ -1,0 +1,26 @@
+﻿@model wb6.Models.Seen
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Seen</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HasSeen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasSeen)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SeenID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,67 @@
+﻿@model wb6.Models.AnnouncementViewModel
+@{
+    ViewBag.Title = Model.Announcement.Subject;
+}
+
+<h2>Announcement Details</h2>
+<p>
+    <div id="twitterShare">
+        Share on Twitter: 
+        @Twitter.TweetButton(url: @Html.Encode("https://www.asp.net/web-pages/overview/ui-layouts-and-themes/twitter-helper"), largeButton: false, hashtag: "whiteboardtest")
+    </div>
+
+    <div id="announcementActionLinks">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Announcement.AnnouncementID }) |
+        @Html.ActionLink("Back to Announcements", "Index")
+    </div>
+</p>
+
+
+<div>
+    <div id="announcementAndComments">
+        <div id="announcementContent">
+            <div id="announcementSubject">
+                @Html.DisplayFor(model => model.Announcement.Subject)
+            </div>
+            
+            <div id="announcementAuthor">
+                @Html.Encode("by ") @Html.DisplayFor(model => model.Announcement.User.UserName)
+            </div>
+            <div id="announcementCreatedAt">
+                @Html.DisplayFor(model => model.Announcement.CreatedAt)
+            </div> 
+
+            <hr />
+
+            <div id="announcementDesc">
+                @Html.DisplayFor(model => model.Announcement.Description)
+            </div>
+
+            <hr />
+
+            <div id="announcementSeens">
+                @Html.Encode("Seen by ") @Html.Encode(Model.MarkedAsRead.Count())
+                @Html.ActionLink("(View)", "../Seens/Index", new { id = Model.Announcement.AnnouncementID }) |
+                @Html.ActionLink("Not Seen by...", "../Seens/NotSeen", new { id = Model.Announcement.AnnouncementID })
+            </div> 
+        </div>
+
+        <div id="commentsSection">
+            <h2>Comments</h2>
+            <p>
+                @Html.ActionLink("Add Comment", "../Comments/Create/", new { id = Model.Announcement.AnnouncementID })
+            </p>
+            <div id="commentsDiv">
+                @Html.Encode("Comments Loading...")
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Custom_Scripts/BuildAnnouncementDetailed.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
